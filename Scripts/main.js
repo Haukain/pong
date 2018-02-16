@@ -67,10 +67,10 @@ function nombre_murs(){
 pong = new Pong(1,2,2,ctx,decalage,c_largeur,c_hauteur);
 
 //Fonction de boucle
+function boucle() {
+  pong.execute();
+}
 if(pause!=true){
 	//Déplacement des formes
-	function boucle() {
-		pong.execute();
-	}
 	var_boucle = setInterval(boucle, dt);
 }

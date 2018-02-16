@@ -2,81 +2,93 @@
 <html>
 <head>
 <style>
-button {
-    background-color: #bae1ff;
+canvas{
+  max-width:100vw;
+  max-height:100vh;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);/* hack pour centrer le canvas */
+  background:white;
+}
+body{
+  background:grey;
+}
+/* interface */
+.interface{
+  position: fixed;
+  right:0;
+  top:0;
+  text-align:right;
+  z-index: 2;
+  font-family:arial;
+  color: white;
+  padding: 10px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 0 0 0 5px;
+  box-shadow: 0 10px 20px -10px rgba(0,0,0,0.5);
+  
+  
+}
+.interface .boutons button {
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0 5px 20px -5px rgba(0,0,0,0.5);
     border: none;
     color: white;
     height: 50px;
     width: 100px;
     font-size: 18px;
-    cursor: pointer;
-    position: absolute;
-    z-index: 2;
+    margin:3px 7.5px;
 }
-#bouton_pause {
-    right:460px;
-    top: 10px;
-}
-#bouton_reset {
-    right: 310px;
-    top: 10px;
-}
-#bouton_couleur {
-    right: 160px;
-    top: 10px;
-}
-#bouton_vitesse {
-    right: 10px;
-    top: 10px;
+.boite_entree{
+  display:inline-block;
+  text-align:center;
+  margin:3px 7.5px;
 }
 input {
-    background-color: #bae1ff;
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0 5px 20px -5px rgba(0,0,0,0.5);
+    padding: 10px 15px;
+    color:white;
     border: none;
     width: 100px;
-    position: absolute;
-    z-index: 2;
+    display:inline-block;
+    margin:8px 0px;
 }
-#nb_mobiles {
-    top: 100px;
-    right:460px;
-}
-#nb_murs {
-    top: 100px;
-    right:310px;
-}
-#div_nb_mobiles {
-    position: absolute;
-    top: 60px;
-    right:440px;
-}
-#div_nb_murs {
-    position: absolute;
-    top: 60px;
-    right:300px;
-}
-#div_desc_nb_mobiles {
-    position: absolute;
-    top: 105px;
-    right:460px;
-}
-#div_desc_nb_murs {
-    position: absolute;
-    top: 105px;
-    right:320px;
-}
-#texte{
-    color: #bae1ff;
+.interface label{
     font-size: 18px;
 }
 </style>
 </head>
 <body>
 
-<!-- Création de la zone de Canvas --> 
+<!-- Création de la zone de Canvas -->
 <canvas id="myCanvas" width="1332" height="924" style="border:1px solid #bae1ff;">
-Le canvas n'a pas pu être chargé :(</canvas>
+  Le canvas n'a pas pu être chargé :(
+</canvas>
 
-<!-- Importation différents fichier de Javascript --> 
+<!-- Création des éléments de l'interface -->
+<div class="interface">
+  <div class="boutons">
+    <button onclick="pause_game()" id="bouton_pause" type="button">Pause</button>
+    <button onclick="reset()" id="bouton_reset" type="button">Reset</button>
+    <button onclick="couleur_aleatoire()" id="bouton_couleur" type="button">Couleur</button>
+    <button onclick="vitesse_aleatoire()" id="bouton_vitesse" type="button">Vitesse</button>
+  </div>
+  <div class="textes">
+    <div class="boite_entree">
+      <label for="nb_mobiles">Nombre de mobiles</label><br>
+      <input onkeydown="if (event.keyCode == 13) nombre_mobiles()" type="text" id="nb_mobiles"><br>
+      <label for="nb_mobiles">Entre 1 et 250</label>
+    </div>
+    <div class="boite_entree">
+      <label for="nb_murs">Nombre de murs</label><br>
+      <input onkeydown="if (event.keyCode == 13) nombre_murs()" type="text" id="nb_murs"><br>
+      <label for="nb_murs">Entre 0 et 5</label>
+    </div>
+  </div>
+</div>
+<!-- Importation différents fichier de Javascript -->
 <script src="scripts/couleur.js"></script>
 <script src="scripts/forme.js"></script>
 <script src="scripts/mobile.js"></script>
@@ -85,20 +97,5 @@ Le canvas n'a pas pu être chargé :(</canvas>
 <script src="scripts/triangle.js"></script>
 <script src="scripts/pong.js"></script>
 <script src="scripts/main.js"></script>
-
-<!-- Création des éléments de l'interface --> 
-<button onclick="pause_game()" id="bouton_pause" type="button">Pause</button>
-<button onclick="reset()" id="bouton_reset" type="button">Reset</button>
-<button onclick="couleur_aleatoire()" id="bouton_couleur" type="button">Couleur</button>
-<button onclick="vitesse_aleatoire()" id="bouton_vitesse" type="button">Vitesse</button>
-<div id="div_nb_mobiles"> <p id="texte"> Nombre de mobiles<p> </div>
-<div id="div_nb_murs"> <p id="texte"> Nombre de murs<p> </div>
-<input onkeydown="if (event.keyCode == 13)
-                        nombre_mobiles()" type="text" id="nb_mobiles" type="nb_elements">
-<input onkeydown="if (event.keyCode == 13)
-                        nombre_murs()" type="text" id="nb_murs" type="nb_murs">
-<div id="div_desc_nb_mobiles"> <p id="texte"> Entre 1 et 250<p> </div>
-<div id="div_desc_nb_murs"> <p id="texte"> Entre 0 et 5<p> </div>
-    
 </body>
 </html>
