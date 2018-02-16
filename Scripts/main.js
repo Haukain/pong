@@ -61,10 +61,10 @@ pong = new Pong(1,2,2,ctx,decalage,c_largeur,c_hauteur);
 //Fonction de boucle
 let prevT =0;
 function boucle(t) {
+  requestAnimationFrame(boucle);
   let dt=(t-prevT)/1000;
   if(dt>1)return;
   prevT=t;
-  requestAnimationFrame(boucle);
   console.log(dt);
   if(!pause)pong.execute(dt*20);
 }
