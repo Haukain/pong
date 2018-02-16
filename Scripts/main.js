@@ -15,25 +15,30 @@ function intervalle(min, max) {
     return Math.random() * (max - min) + min;
 }
 
+let BR1 = document.getElementById("BR1");
+
 //Fonction Bouton Pause
 function pause_game(){
   pause = !pause;
 	if (pause) console.log("Le jeu a été mis en pause");
 	else console.log("Le jeu a été relancé");
 }
-document.getElementById("bouton_pause").addEventListener("click",pause_game,false);
+let pauseButton = new Button("Pause",pause_game);
+BR1.appendChild(pauseButton.element);
 //Fonction Bouton Reset
 function reset(){
 	location.reload();
 }
-document.getElementById("bouton_reset").addEventListener("click",reset,false);
+let resetButton = new Button("Reset",reset);
+BR1.appendChild(resetButton.element);
 //Fontion Bouton Couleur
 function couleur_aleatoire(){
 	pong._mobiles.forEach(function(element) {
 		element._couleur.set_couleur(Math.trunc(intervalle(0,255)),Math.trunc(intervalle(0,255)),Math.trunc(intervalle(0,255)));
 	});
 }
-document.getElementById("bouton_couleur").addEventListener("click",couleur_aleatoire,false);
+let colorButton = new Button("Couleur",couleur_aleatoire);
+BR1.appendChild(colorButton.element);
 //Fonction Bouton Vitesse
 function vitesse_aleatoire(){
 	pong._mobiles.forEach(function(element) {
@@ -41,7 +46,8 @@ function vitesse_aleatoire(){
 		element.set_vy(intervalle(-6,6));
 	});
 }
-document.getElementById("bouton_vitesse").addEventListener("click",vitesse_aleatoire,false);
+let speedButton = new Button("Vitesse",vitesse_aleatoire);
+BR1.appendChild(speedButton.element);
 //Fonction Input Nombre mobiles
 function nombre_mobiles(event){
   if (event.keyCode != 13) return;
@@ -67,7 +73,7 @@ function boucle(t) {
   requestAnimationFrame(boucle);
   let dt=(t-prevT)/1000;
   prevT=t;
-  console.log(dt);
+  //console.log(dt);
   if(!pause && dt<1)pong.execute(dt*20);
 }
 requestAnimationFrame(boucle);
