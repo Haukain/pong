@@ -111,10 +111,10 @@ class Pong{
 		});
 	}
 
-	execute(){
+	execute(dt){
 		ctx.clearRect(0,0,this._c_largeur,this._c_hauteur);
 	    pong.get_mobiles().forEach(function(element) {
-	  		element.deplace();
+	  		element.deplace(dt);
 	  		element.dessine();
 			});
 	    pong.get_murs().forEach(function(element) {

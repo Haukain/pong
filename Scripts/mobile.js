@@ -19,10 +19,10 @@ class Mobile extends Forme {
 	set_vy(vy){
 		this._vitesse_y = vy;
 	}
-	deplace(){
-		this._x = this._x + this._vitesse_x;
-		this._y = this._y + this._vitesse_y;
-		this._orientation = this._orientation + 0.03*Math.sign(this._orientation);
+	deplace(dt){
+		this._x = this._x + this._vitesse_x*dt;
+		this._y = this._y + this._vitesse_y*dt;
+		this._orientation = this._orientation + 0.03*Math.sign(this._orientation)*dt;
 	}
 
 	dessine(){
