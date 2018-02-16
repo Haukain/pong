@@ -43,18 +43,21 @@ function vitesse_aleatoire(){
 }
 document.getElementById("bouton_vitesse").addEventListener("click",vitesse_aleatoire,false);
 //Fonction Input Nombre mobiles
-function nombre_mobiles(){
+function nombre_mobiles(event){
+  if (event.keyCode != 13) return;
 	var nb_mobiles = parseInt(document.getElementById("nb_mobiles").value);
 	if(nb_mobiles<1 && nb_mobiles>250) return;
   pong.reset_mobiles(nb_mobiles);
 }
+document.getElementById("nb_mobiles").addEventListener("keydown",nombre_mobiles,false);
 //Fonction Input Nombre murs
-function nombre_murs(){
+function nombre_murs(event){
+  if (event.keyCode != 13) return;
 	var nb_murs = parseInt(document.getElementById("nb_murs").value);
   if(nb_murs<0 && nb_murs>5) return;
   pong.reset_murs(nb_murs);
 }
-
+document.getElementById("nb_murs").addEventListener("keydown",nombre_murs,false);
 //Création du jeu
 pong = new Pong(1,2,2,ctx,decalage,c_largeur,c_hauteur);
 
