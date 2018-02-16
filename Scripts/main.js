@@ -63,9 +63,8 @@ let prevT =0;
 function boucle(t) {
   requestAnimationFrame(boucle);
   let dt=(t-prevT)/1000;
-  if(dt>1)return;
   prevT=t;
   console.log(dt);
-  if(!pause)pong.execute(dt*20);
+  if(!pause && dt<1)pong.execute(dt*20);
 }
 requestAnimationFrame(boucle);
