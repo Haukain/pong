@@ -27,8 +27,8 @@ body{
   background: rgba(0,0,0,0.5);
   border-radius: 0 0 0 5px;
   box-shadow: 0 10px 20px -10px rgba(0,0,0,0.5);
-  
-  
+
+
 }
 .interface .boutons button {
     background-color: rgba(255,255,255,0.2);
@@ -52,11 +52,12 @@ input {
     color:white;
     border: none;
     width: 100px;
-    display:inline-block;
+    display:block;
     margin:8px 0px;
 }
 .interface label{
     font-size: 18px;
+    display:block;
 }
 </style>
 </head>
@@ -71,28 +72,10 @@ input {
 <div class="interface">
   <div class="boutons" id="BR1">
   </div>
-  <div class="textes">
-    <div class="boite_entree">
-      <label for="nb_mobiles">Nombre de mobiles</label><br>
-      <input type="text" id="nb_mobiles"><br>
-      <label for="nb_mobiles">Entre 1 et 250</label>
-    </div>
-    <div class="boite_entree">
-      <label for="nb_murs">Nombre de murs</label><br>
-      <input type="text" id="nb_murs"><br>
-      <label for="nb_murs">Entre 0 et 5</label>
-    </div>
+  <div class="textes" id="IR1">
   </div>
 </div>
 <!-- Importation différents fichier de Javascript -->
-<script src="scripts/button.js"></script>
-<script src="scripts/couleur.js"></script>
-<script src="scripts/forme.js"></script>
-<script src="scripts/mobile.js"></script>
-<script src="scripts/mur.js"></script>
-<script src="scripts/cercle.js"></script>
-<script src="scripts/triangle.js"></script>
-<script src="scripts/pong.js"></script>
-<script src="scripts/main.js"></script>
+<script src="scripts/main.js" type="module"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-class Couleur{
+export class Couleur{
 	constructor(r =0,v =250,b =250){
 		this._rouge = r;
 		this._vert = v;

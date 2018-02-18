@@ -1,4 +1,5 @@
-class Mobile extends Forme {
+import { Forme } from "./forme.js";
+export class Mobile extends Forme {
 	constructor(x,y,largeur,hauteur,orientation,ctx,vitesse_x, vitesse_y,r,v,b) {
 		super(x,y,largeur,hauteur,orientation,ctx,r,v,b);
 		if (this.constructor === Mobile) {

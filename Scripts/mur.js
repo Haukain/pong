@@ -1,4 +1,5 @@
-class Mur extends Forme {
+import { Forme } from "./forme.js";
+export class Mur extends Forme {
 	constructor(x,y,largeur,hauteur,orientation,ctx,r,v,b,coefficient) {
 		super(x,y,largeur,hauteur,orientation,ctx,r,v,b);
     	this._coefficient = coefficient;

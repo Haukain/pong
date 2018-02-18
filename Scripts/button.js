@@ -1,4 +1,4 @@
-class Button{
+export class Button{
   constructor(text,fun){
     this._text=text;
     this._fun=fun;

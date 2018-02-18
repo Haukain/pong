@@ -1,4 +1,5 @@
-class Cercle extends Mobile {
+import { Mobile } from "./mobile.js";
+export class Cercle extends Mobile {
 	constructor(x,y,rayon,orientation,ctx,vitesse_x,vitesse_y,r,v,b) {
 		super(x,y,2*rayon,2*rayon,orientation,ctx,vitesse_x,vitesse_y,r,v,b);
 	}

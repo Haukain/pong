@@ -1,4 +1,5 @@
-class Forme {
+import { Couleur } from "./couleur.js";
+export class Forme {
 
   constructor(x,y,largeur,hauteur,orientation,ctx,r=0,v=0,b=0) {
     if (this.constructor === Forme) {
