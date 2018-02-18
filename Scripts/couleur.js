@@ -6,6 +6,7 @@ export class Couleur{
 		this._forme;
 	}
 
+	//Get
 	get_color(){
 		col = [this._rouge,this._vert,this._bleu]
 		return col;
@@ -24,7 +25,7 @@ export class Couleur{
 		this._vert = g;
 		this._bleu = b;
 	}
-
+	//Set
 	set_forme(f){
 		this._forme = f;
 	}

@@ -35,7 +35,7 @@ BR1.appendChild(resetButton.element);
 //Fontion Bouton Couleur
 function couleur_aleatoire(){
 	pong._mobiles.forEach(function(element) {
-		element._couleur.set_couleur(Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)));
+		element.get_couleur().set_couleur(Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)));
 	});
 }
 let colorButton = new Button("Couleur",couleur_aleatoire);

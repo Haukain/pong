@@ -7,6 +7,7 @@ export class Button{
     this._elem.addEventListener("click",(e)=>{that._fun(e);},false);
     this._elem.textContent=this._text;
   }
+  //Set
   set text(t){
     this._text=t;
     this._elem.textContent=this._text;
@@ -14,6 +15,7 @@ export class Button{
   set action(f){
     this._fun=f;
   }
+  //Get
   get element(){
     return this._elem;
   }

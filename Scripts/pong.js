@@ -80,8 +80,8 @@ export class Pong{
 	  			}
 	  		that._murs.forEach(function(mur) {
 		  		if(mur._orientation==0){
-		  			if (mobile.get_x()>mur.get_x()-mur._largeur/2 && mobile.get_x()<(mur.get_x()+mur._largeur/2) && mobile.get_y()>mur.get_y()-mur._hauteur/2 && mobile.get_y()<(mur.get_y()+mur._hauteur/2) ) {
-		  				if(mobile.get_x()-mobile.get_vx()<mur.get_x()-mur._largeur/2 || mobile.get_x()-mobile.get_vx()>(mur.get_x()+mur._largeur/2)){
+		  			if (mobile.get_x()>mur.get_x()-mur.largeur()/2 && mobile.get_x()<(mur.get_x()+mur.largeur()/2) && mobile.get_y()>mur.get_y()-mur.hauteur()/2 && mobile.get_y()<(mur.get_y()+mur.hauteur()/2) ) {
+		  				if(mobile.get_x()-mobile.get_vx()<mur.get_x()-mur.largeur()/2 || mobile.get_x()-mobile.get_vx()>(mur.get_x()+mur.largeur()/2)){
 		  					mobile.set_vx(-mobile.get_vx());
 
 		  				if(Math.abs(mobile.get_vx())>=1 && Math.abs(mobile.get_vx())<=5){
@@ -97,8 +97,8 @@ export class Pong{
 		  				}
 		  			}
 		  		} else{
-		  			if (mobile.get_x()>mur.get_x()-mur._hauteur/2 && mobile.get_x()<(mur.get_x()+mur._hauteur/2) && mobile.get_y()>mur.get_y()-mur._largeur/2 && mobile.get_y()<(mur.get_y()+mur._largeur/2) ) {
-		  				if(mobile.get_x()-mobile.get_vx()<mur.get_x()-mur._hauteur/2 || mobile.get_x()-mobile.get_vx()>(mur.get_x()+mur._hauteur/2)){
+		  			if (mobile.get_x()>mur.get_x()-mur.hauteur()/2 && mobile.get_x()<(mur.get_x()+mur.hauteur()/2) && mobile.get_y()>mur.get_y()-mur.largeur()/2 && mobile.get_y()<(mur.get_y()+mur.largeur()/2) ) {
+		  				if(mobile.get_x()-mobile.get_vx()<mur.get_x()-mur.hauteur()/2 || mobile.get_x()-mobile.get_vx()>(mur.get_x()+mur.hauteur()/2)){
 		  					mobile.set_vx(-mobile.get_vx());
 		  				if(Math.abs(mobile.get_vx())>=1 && Math.abs(mobile.get_vx())<=5){
 		  					mobile.set_vx(mobile.get_vx()*mur.get_coeff());

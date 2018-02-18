@@ -27,6 +27,12 @@ export class Forme {
   largeur() {
     return this._largeur;
   }
+  get_orientation() {
+    return this._orientation;
+  }
+  get_couleur() {
+    return this._couleur;
+  }
   //Set
   set_x(pos_x) {
     this._x = pos_x;
@@ -39,6 +45,9 @@ export class Forme {
   }
   set_largeur(w) {
     this._largeur = w;
+  }
+  set_orientation(o) {
+    this._orientation = o;
   }
 
   //Méthodes
