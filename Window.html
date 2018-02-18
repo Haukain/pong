@@ -27,8 +27,11 @@ body{
   background: rgba(0,0,0,0.5);
   border-radius: 0 0 0 5px;
   box-shadow: 0 10px 20px -10px rgba(0,0,0,0.5);
-
-
+  transform: translateY(-90%);
+  transition: transform .5s;
+}
+.interface:hover{
+  transform: translateY(0%);
 }
 .interface .boutons button {
     background-color: rgba(255,255,255,0.2);
