@@ -4,7 +4,7 @@ import { Button } from "./button.js";
 import { NumericInput } from "./numericinput.js";
 // Récupération du Canvas
 var canvas = document.getElementById("myCanvas");
-canvas.addEventListener("click",select_element(),false);
+canvas.addEventListener("click",select_element,false);
 // Récupération de la hauteur et largeur du canvas
 let c_largeur = canvas.width
 let c_hauteur = canvas.height
