@@ -51,10 +51,7 @@ let boutonVitesse = new Bouton("Vitesse",vitesse_aleatoire);
 BR1.appendChild(boutonVitesse.element);
 
 function toggleDebug() {
-  if (pong.getDebug){
-    pong.setDebug = false;
-  }
-  else pong.setDebug = true;
+  pong.setDebug(!pong.getDebug());
 }
 let boutonDebug = new Bouton("Debug",toggleDebug);
 BR1.appendChild(boutonDebug.element);
