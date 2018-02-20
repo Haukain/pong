@@ -8,9 +8,6 @@ export function randomFromTo(min, max) {
 export function inInterval(val,min, max) {
     return val>=min && val<=max;
 }
-export function select_element() {
-	console.log("cc");
-}
 export function getRelativeCoordinates ( e, container) {
     var pos = {}, offset = {}, ref;
     ref = container.offsetParent;

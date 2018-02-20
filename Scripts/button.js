@@ -8,15 +8,18 @@ export class Button{
     this._elem.textContent=this._text;
   }
   //Set
-  set text(t){
+  setText(t){
     this._text=t;
     this._elem.textContent=this._text;
   }
-  set action(f){
+  setAction(f){
     this._fun=f;
   }
   //Get
-  get element(){
+  getElement(){
     return this._elem;
+  }
+  get element(){
+    return this.getElement();
   }
 }

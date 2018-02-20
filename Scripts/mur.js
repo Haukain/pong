@@ -14,10 +14,10 @@ export class Mur extends Forme {
 	}
 
 	//Methodes
-	get_coeff(){
+	getCoeff(){
 		return this._coefficient;
 	}
-	set_coeff(c){
+	setCoeff(c){
 		this._coefficient = c;
 	}
 	dessine() {
@@ -25,7 +25,7 @@ export class Mur extends Forme {
 		this._ctx.beginPath();
 		this._ctx.translate(this._x,this._y);
 		this._ctx.rotate(-this._orientation);
-		this._ctx.fillStyle = 'rgb(' + this._couleur.get_rouge() + ',' + this._couleur.get_vert() + ',' + this._couleur.get_bleu() + ')';
+		this._ctx.fillStyle = 'rgb(' + this._couleur.getRouge() + ',' + this._couleur.getVert() + ',' + this._couleur.getBleu() + ')';
 		this._ctx.fillRect(-this._largeur/2,-this._hauteur/2,this._largeur,this._hauteur);
 		this._ctx.fill();
 		this._ctx.restore();

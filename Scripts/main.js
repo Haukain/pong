@@ -1,4 +1,4 @@
-import { assert, randomFromTo, inInterval, select_element, getRelativeCoordinates} from "./utils.js";
+import { assert, randomFromTo, inInterval, getRelativeCoordinates} from "./utils.js";
 import { Pong } from "./pong.js";
 import { Button } from "./button.js";
 import { NumericInput } from "./numericinput.js";
@@ -35,7 +35,7 @@ BR1.appendChild(resetButton.element);
 //Fontion Bouton Couleur
 function couleur_aleatoire(){
 	pong._mobiles.forEach(function(element) {
-		element.get_couleur().set_couleur(Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)));
+		element.getCouleur().setCouleur(Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)));
 	});
 }
 let colorButton = new Button("Couleur",couleur_aleatoire);
@@ -43,21 +43,21 @@ BR1.appendChild(colorButton.element);
 //Fonction Bouton Vitesse
 function vitesse_aleatoire(){
 	pong._mobiles.forEach(function(element) {
-		element.set_vx(randomFromTo(-6,6));
-		element.set_vy(randomFromTo(-6,6));
+		element.setVX(randomFromTo(-6,6));
+		element.setVY(randomFromTo(-6,6));
 	});
 }
 let speedButton = new Button("Vitesse",vitesse_aleatoire);
 BR1.appendChild(speedButton.element);
 //Fonction Input Nombre mobiles
 function nombre_mobiles(nb_mobiles){
-  pong.reset_mobiles(nb_mobiles);
+  pong.resetMobiles(nb_mobiles);
 }
 let mobileInput = new NumericInput("Nombre de mobiles","Entre 1 et 250",nombre_mobiles,1,250,true);
 IR1.appendChild(mobileInput.element);
 //Fonction Input Nombre murs
 function nombre_murs(nb_murs){
-  pong.reset_murs(nb_murs);
+  pong.resetMurs(nb_murs);
 }
 let wallInput = new NumericInput("Nombre de murs","Entre 0 et 5",nombre_murs,0,5,true);
 IR1.appendChild(wallInput.element);

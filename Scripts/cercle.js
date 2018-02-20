@@ -15,7 +15,7 @@ export class Cercle extends Mobile {
 		this._ctx.beginPath();
 		this._ctx.translate(this._x,this._y);
 		this._ctx.arc(0,0,this._largeur/2,0,2*Math.PI);
-		this._ctx.fillStyle = 'rgb(' + this._couleur.get_rouge() + ',' + this._couleur.get_vert() + ',' + this._couleur.get_bleu() + ')';
+		this._ctx.fillStyle = 'rgb(' + this._couleur.getRouge() + ',' + this._couleur.getVert() + ',' + this._couleur.getBleu() + ')';
 		this._ctx.fill();
 		this._ctx.restore();
 

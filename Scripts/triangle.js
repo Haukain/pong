@@ -20,7 +20,7 @@ export class Triangle extends Mobile {
 		this._ctx.lineTo(this._largeur/2,-this._hauteur/2);
 		this._ctx.lineTo(-this._largeur/2,-this._hauteur/2);
 		this._ctx.lineTo(0,this._hauteur/2);
-		this._ctx.fillStyle = 'rgb(' + this._couleur.get_rouge() + ',' + this._couleur.get_vert() + ',' + this._couleur.get_bleu() + ')';
+		this._ctx.fillStyle = 'rgb(' + this._couleur.getRouge() + ',' + this._couleur.getVert() + ',' + this._couleur.getBleu() + ')';
 		this._ctx.fill();
 		this._ctx.restore();
   }

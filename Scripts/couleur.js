@@ -7,26 +7,26 @@ export class Couleur{
 	}
 
 	//Get
-	get_color(){
+	getCouleur(){
 		col = [this._rouge,this._vert,this._bleu]
 		return col;
 	}
-	get_rouge(){
+	getRouge(){
 		return this._rouge;
 	}
-	get_vert(){
+	getVert(){
 		return this._vert;
 	}
-	get_bleu(){
+	getBleu(){
 		return this._bleu;
 	}
-	set_couleur(r,g,b){
+	setCouleur(r,g,b){
 		this._rouge = r;
 		this._vert = g;
 		this._bleu = b;
 	}
 	//Set
-	set_forme(f){
+	setForme(f){
 		this._forme = f;
 	}
 }

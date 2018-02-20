@@ -12,7 +12,7 @@ export class Point extends Forme {
 		this._ctx.save();
 		this._ctx.beginPath();
 		this._ctx.translate(this._x,this._y);
-		this._ctx.fillStyle = 'rgb(' + this._couleur.get_rouge() + ',' + this._couleur.get_vert() + ',' + this._couleur.get_bleu() + ')';
+		this._ctx.fillStyle = 'rgb(' + this._couleur.getRouge() + ',' + this._couleur.getVert() + ',' + this._couleur.getBleu() + ')';
 		this._ctx.fillRect(-5,-5,10,10);
 		this._ctx.restore();
 	}

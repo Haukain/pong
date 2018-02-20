@@ -33,10 +33,10 @@ export class Pong{
 		}
 	}
 
-	get_mobiles(){
+	getMobiles(){
 		return this._mobiles;
 	}
-	reset_mobiles(nb_mobiles){
+	resetMobiles(nb_mobiles){
 		this._mobiles = [];
 		var i;
 		if(nb_mobiles%2==0){
@@ -55,10 +55,10 @@ export class Pong{
 			}
 		}
 	}
-	get_murs(){
+	getMurs(){
 		return this._murs;
 	}
-	reset_murs(nb_murs){
+	resetMurs(nb_murs){
 		this._murs = [];
 		var i;
 		for (i=0;i<nb_murs;i++){
@@ -77,34 +77,34 @@ export class Pong{
 		this._mobiles.forEach(function(mobile) {
 	  		that._murs.forEach(function(mur) {
 		  		if(mur._orientation==0){
-		  			if (mobile.get_x()>mur.get_x()-mur.largeur()/2 && mobile.get_x()<(mur.get_x()+mur.largeur()/2) && mobile.get_y()>mur.get_y()-mur.hauteur()/2 && mobile.get_y()<(mur.get_y()+mur.hauteur()/2) ) {
-		  				if(mobile.get_x()-mobile.get_vx()<mur.get_x()-mur.largeur()/2 || mobile.get_x()-mobile.get_vx()>(mur.get_x()+mur.largeur()/2)){
-		  					mobile.set_vx(-mobile.get_vx());
+		  			if (mobile.getX()>mur.getX()-mur.getLargeur()/2 && mobile.getX()<(mur.getX()+mur.getLargeur()/2) && mobile.getY()>mur.getY()-mur.getHauteur()/2 && mobile.getY()<(mur.getY()+mur.getHauteur()/2) ) {
+		  				if(mobile.getX()-mobile.getVX()<mur.getX()-mur.getLargeur()/2 || mobile.getX()-mobile.getVX()>(mur.getX()+mur.getLargeur()/2)){
+		  					mobile.setVX(-mobile.getVX());
 
-		  				if(Math.abs(mobile.get_vx())>=1 && Math.abs(mobile.get_vx())<=5){
-		  					mobile.set_vx(mobile.get_vx()*mur.get_coeff());
+		  				if(Math.abs(mobile.getVX())>=1 && Math.abs(mobile.getVX())<=5){
+		  					mobile.setVX(mobile.getVX()*mur.getCoeff());
 		  				}
 
 		  				}
 		  				else{
-		  					mobile.set_vy(-mobile.get_vy());
-		  				if(Math.abs(mobile.get_vy())>=1 && Math.abs(mobile.get_vy())<=5){
-		  					mobile.set_vy(mobile.get_vy()*mur.get_coeff());
+		  					mobile.setVY(-mobile.getVY());
+		  				if(Math.abs(mobile.getVY())>=1 && Math.abs(mobile.getVY())<=5){
+		  					mobile.setVY(mobile.getVY()*mur.getCoeff());
 		  				}
 		  				}
 		  			}
 		  		} else{
-		  			if (mobile.get_x()>mur.get_x()-mur.hauteur()/2 && mobile.get_x()<(mur.get_x()+mur.hauteur()/2) && mobile.get_y()>mur.get_y()-mur.largeur()/2 && mobile.get_y()<(mur.get_y()+mur.largeur()/2) ) {
-		  				if(mobile.get_x()-mobile.get_vx()<mur.get_x()-mur.hauteur()/2 || mobile.get_x()-mobile.get_vx()>(mur.get_x()+mur.hauteur()/2)){
-		  					mobile.set_vx(-mobile.get_vx());
-		  				if(Math.abs(mobile.get_vx())>=1 && Math.abs(mobile.get_vx())<=5){
-		  					mobile.set_vx(mobile.get_vx()*mur.get_coeff());
+		  			if (mobile.getX()>mur.getX()-mur.getHauteur()/2 && mobile.getX()<(mur.getX()+mur.getHauteur()/2) && mobile.getY()>mur.getY()-mur.getLargeur()/2 && mobile.getY()<(mur.getY()+mur.getLargeur()/2) ) {
+		  				if(mobile.getX()-mobile.getVX()<mur.getX()-mur.getHauteur()/2 || mobile.getX()-mobile.getVX()>(mur.getX()+mur.getHauteur()/2)){
+		  					mobile.setVX(-mobile.getVX());
+		  				if(Math.abs(mobile.getVX())>=1 && Math.abs(mobile.getVX())<=5){
+		  					mobile.setVX(mobile.getVX()*mur.getCoeff());
 		  				}
 		  				}
 		  				else{
-		  					mobile.set_vy(-mobile.get_vy());
-		  				if(Math.abs(mobile.get_vy())>=1 && Math.abs(mobile.get_vy())<=5){
-		  					mobile.set_vy(mobile.get_vy()*mur.get_coeff());
+		  					mobile.setVY(-mobile.getVY());
+		  				if(Math.abs(mobile.getVY())>=1 && Math.abs(mobile.getVY())<=5){
+		  					mobile.setVY(mobile.getVY()*mur.getCoeff());
 		  				}
 		  				}
 	  				}
@@ -113,11 +113,11 @@ export class Pong{
 		});
 		//nouvel algorithme
 		for(let mobile of this._mobiles){
-  		if (mobile.get_x()>that._c_largeur || mobile.get_x()<0){
-  			mobile.set_vx(-mobile.get_vx());
+  		if (mobile.getX()>that._c_largeur || mobile.getX()<0){
+  			mobile.setVX(-mobile.getVX());
 			}
-  		if (mobile.get_y()>that._c_hauteur || mobile.get_y()<0){
-  			mobile.set_vy(-mobile.get_vy());
+  		if (mobile.getY()>that._c_hauteur || mobile.getY()<0){
+  			mobile.setVY(-mobile.getVY());
 			}
 		}
 		let objects = this._mobiles.concat(this._murs);
@@ -125,14 +125,14 @@ export class Pong{
 			for(let j of objects){
 				if(i != j && i instanceof Mobile && i.collisionBoite(j) && i.collisionPolygonale(j)){
 					if(j instanceof Mobile){
-						let vi = Math.sqrt(Math.pow(i.get_vx(),2)+Math.pow(i.get_vy(),2));
-						let vj = Math.sqrt(Math.pow(j.get_vx(),2)+Math.pow(j.get_vy(),2));
+						let vi = Math.sqrt(Math.pow(i.getVX(),2)+Math.pow(i.getVY(),2));
+						let vj = Math.sqrt(Math.pow(j.getVX(),2)+Math.pow(j.getVY(),2));
 						let v = (vi+vj)/2;
-						let a =Math.atan2(i.get_y()-j.get_y(),i.get_x()-j.get_x());
-						i.set_vx(v*Math.cos(a));
-						i.set_vy(v*Math.sin(a));
-						j.set_vx(-v*Math.cos(a));
-						j.set_vy(-v*Math.sin(a));
+						let a =Math.atan2(i.getY()-j.getY(),i.getX()-j.getX());
+						i.setVX(v*Math.cos(a));
+						i.setVY(v*Math.sin(a));
+						j.setVX(-v*Math.cos(a));
+						j.setVY(-v*Math.sin(a));
 					}else{
 						if(j instanceof Mur){ //cas particulier du mur
 							//a compléter
@@ -145,13 +145,13 @@ export class Pong{
 
 	execute(dt){
 		this._ctx.clearRect(0,0,this._c_largeur,this._c_hauteur);
-	    this.get_mobiles().forEach(function(element) {
+	    this.getMobiles().forEach(function(element) {
 	  		element.deplace(dt);
 			});
-	    this.get_murs().concat(this.get_mobiles()).forEach(function(element) {
+	    this.getMurs().concat(this.getMobiles()).forEach(function(element) {
 	  		element.dessine();
 			});
-			if(this._debug) this.get_murs().concat(this.get_mobiles()).forEach(function(element) {
+			if(this._debug) this.getMurs().concat(this.getMobiles()).forEach(function(element) {
 	  		element.dessineCollision();
 			});
 	    this.collision();
