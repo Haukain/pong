@@ -49,6 +49,12 @@ function vitesse_aleatoire(){
 }
 let boutonVitesse = new Bouton("Vitesse",vitesse_aleatoire);
 BR1.appendChild(boutonVitesse.element);
+//fonction Bouton interCollision
+function inverser_interCollision(){
+	pong.setInterCollision(!pong.getInterCollision());
+}
+let boutonInterCollision = new Bouton("InterCollision",inverser_interCollision);
+BR1.appendChild(boutonInterCollision.element);
 //Fonction Input Nombre mobiles
 function nombre_mobiles(nb_mobiles){
   pong.resetMobiles(nb_mobiles);
@@ -62,7 +68,7 @@ function nombre_murs(nb_murs){
 let entreeMurs = new EntreeNumerique("Nombre de murs","Entre 0 et 5",nombre_murs,0,5,true);
 IR1.appendChild(entreeMurs.element);
 //Création du jeu
-let pong = new Pong(1,2,2,ctx,decalage,c_largeur,c_hauteur,true);
+let pong = new Pong(1,2,2,ctx,decalage,c_largeur,c_hauteur,true,false);
 
 canvas.addEventListener("click",e=>{
   let coords = getRelativeCoordinates(e,canvas);

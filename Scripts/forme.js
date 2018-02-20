@@ -38,6 +38,9 @@ export class Forme {
   getCouleur() {
     return this._couleur;
   }
+  getBoiteCollision(){
+    return this._boiteCollision;
+  }
   getPolygoneCollision(){
     return this._polygoneCollision;
   }
@@ -74,14 +77,12 @@ export class Forme {
     this._boiteCollision = new BoiteCollision(this._x,this._y,this._largeur/1.5,this._hauteur/1.5);
 
   }
-  collisionBoite(f,deux=false){
+  collisionBoite(f){
     assert(f instanceof Forme,"doit être une instance de Forme");
-    let colY = inInterval(f._boiteCollision.haut,this._boiteCollision.bas,this._boiteCollision.haut) || inInterval(f._boiteCollision.bas,this._boiteCollision.bas,this._boiteCollision.haut);
-    let colX = inInterval(f._boiteCollision.droite,this._boiteCollision.gauche,this._boiteCollision.droite) || inInterval(f._boiteCollision.gauche,this._boiteCollision.gauche,this._boiteCollision.droite);
-    if(deux || (colY && colX))return colY && colX;
-    else return f.collisionBoite(this,true);
+    return this._boiteCollision.collision(f.getBoiteCollision());
   }
   collisionPolygonale(f){
+    assert(f instanceof Forme,"doit être une instance de Forme");
     return this._polygoneCollision.collision(f.getPolygoneCollision());
   }
   dessineCollision(){
