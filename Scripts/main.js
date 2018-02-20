@@ -34,7 +34,7 @@ let boutonReset = new Bouton("Reset",reset);
 BR1.appendChild(boutonReset.element);
 //Fontion Bouton Couleur
 function couleur_aleatoire(){
-	pong._mobiles.forEach(function(element) {
+	pong.getMobiles().forEach(function(element) {
 		element.getCouleur().setCouleur(Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)));
 	});
 }
@@ -42,7 +42,7 @@ let boutonCouleur = new Bouton("Couleur",couleur_aleatoire);
 BR1.appendChild(boutonCouleur.element);
 //Fonction Bouton Vitesse
 function vitesse_aleatoire(){
-	pong._mobiles.forEach(function(element) {
+	pong.getMobiles().forEach(function(element) {
 		element.setVX(randomFromTo(-6,6));
 		element.setVY(randomFromTo(-6,6));
 	});
@@ -78,7 +78,7 @@ function nombre_murs(nb_murs){
 let entreeMurs = new EntreeNumerique("Nombre de murs","Entre 0 et 5",nombre_murs,0,5,true);
 IR1.appendChild(entreeMurs.element);
 //Création du jeu
-let pong = new Pong(1,2,2,ctx,decalage,c_largeur,c_hauteur,true,false);
+let pong = new Pong(1,4,ctx,decalage,c_largeur,c_hauteur,true,false);
 
 canvas.addEventListener("click",e=>{
   let coords = getRelativeCoordinates(e,canvas);
@@ -95,6 +95,6 @@ function boucle(t) {
   let dt=(t-prevT)/1000;
   prevT=t;
   //console.log(dt);
-  if(!pause && dt<1)pong.execute(dt*20);
+  if(!pause && dt<1)pong.execute(dt*25);
 }
 requestAnimationFrame(boucle);
