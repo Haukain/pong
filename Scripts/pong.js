@@ -1,4 +1,4 @@
-import { randomFromTo } from "./utils.js";
+import { randomFromTo, inInterval } from "./utils.js";
 import { Mobile } from "./mobile.js";
 import { Point } from "./point.js";
 import { Mur } from "./mur.js";
@@ -149,7 +149,17 @@ export class Pong{
 						}
 					}else{
 						if(j instanceof Mur){ //cas particulier du mur
-							//a compléter
+							let x = j.getX();
+							let y = j.getY();
+							let l,h;
+							if(j.getOrientation()==0){l=j.getLargeur();h=j.getHauteur();}
+							else{h=j.getLargeur();l=j.getHauteur();}
+							if(!inInterval(i.getX(),x-l/2,x+l/2)){
+								i.setVX(-i.getVX());
+							}else if(!inInterval(i.getY(),y-h/2,y+h/2)){
+								i.setVY(-i.getVY());
+							}
+
 						}
 					}
 				}

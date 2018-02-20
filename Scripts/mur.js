@@ -20,6 +20,10 @@ export class Mur extends Forme {
 	setCoeff(c){
 		this._coefficient = c;
 	}
+	setOrientation(o){
+		if( o != 0 ) o = Math.PI/2;
+		this._orientation = o;
+	}
 	dessine() {
 		this._ctx.save();
 		this._ctx.beginPath();

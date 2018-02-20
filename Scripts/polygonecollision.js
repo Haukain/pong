@@ -62,7 +62,7 @@ export class PolygoneCollision{
     }
     this.translate(tx,ty);
   }
-  marcheDeJarvis(p){
+  testDansConvexe(p){ //teste si le point est dans le polygone convexe
     let pv=0;
     for(let i=1;i<this._points.length;i++){
       let v1=[this._points[i][0]-this._points[i-1][0],this._points[i][1]-this._points[i-1][1]];
@@ -76,7 +76,7 @@ export class PolygoneCollision{
   collision(c,deux=false){
     let inn = false;
     for(let p of c.points){
-      inn = this.marcheDeJarvis(p);
+      inn = this.testDansConvexe(p);
       if(inn)break;
     }
     if(deux || inn) return inn;
