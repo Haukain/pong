@@ -62,7 +62,7 @@ function nombre_murs(nb_murs){
 let wallInput = new NumericInput("Nombre de murs","Entre 0 et 5",nombre_murs,0,5,true);
 IR1.appendChild(wallInput.element);
 //Création du jeu
-let pong = new Pong(1,2,2,ctx,decalage,c_largeur,c_hauteur,false);
+let pong = new Pong(1,2,2,ctx,decalage,c_largeur,c_hauteur,true);
 
 canvas.addEventListener("click",e=>{
   let coords = getRelativeCoordinates(e,canvas);

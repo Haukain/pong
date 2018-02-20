@@ -1,9 +1,6 @@
 import { Forme } from "./forme.js";
 export class Point extends Forme {
-	constructor(x,y,ctx,r,v,b) {
-		r=r?r:0;
-		v=v?v:0;
-		b=b?b:0;
+	constructor(x,y,ctx,r=0,v=0,b=0) {
 		super(x,y,0,0,0,ctx,r,v,b);
 		this._polygoneCollision.push(x-.1,y-.1);
 		this._polygoneCollision.push(x+.1,y+.1);
