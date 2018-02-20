@@ -50,18 +50,21 @@ function vitesse_aleatoire(){
 let boutonVitesse = new Bouton("Vitesse",vitesse_aleatoire);
 BR1.appendChild(boutonVitesse.element);
 
-function toggleDebug() {
-  pong.setDebug(!pong.getDebug());
-}
-let boutonDebug = new Bouton("Debug",toggleDebug);
-BR1.appendChild(boutonDebug.element);
-
 //fonction Bouton interCollision
 function inverser_interCollision(){
 	pong.setInterCollision(!pong.getInterCollision());
 }
 let boutonInterCollision = new Bouton("InterCollision",inverser_interCollision);
 BR1.appendChild(boutonInterCollision.element);
+
+//Bouton Debug
+function toggleDebug() {
+  pong.setDebug(!pong.getDebug());
+}
+let boutonDebug = new Bouton("Debug",toggleDebug);
+BR1.appendChild(boutonDebug.element);
+
+
 //Fonction Input Nombre mobiles
 function nombre_mobiles(nb_mobiles){
   pong.resetMobiles(nb_mobiles);
