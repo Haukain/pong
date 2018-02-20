@@ -41,17 +41,17 @@ export class Pong{
 		var i;
 		if(nb_mobiles%2==0){
 			for (i=0;i<nb_mobiles/2;i++){
-				this._mobiles.push(new Triangle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(20,40), randomFromTo(40,60), randomFromTo(-1,1), this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255))));
+				this._mobiles.push(new Triangle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(20,40), randomFromTo(40,60), randomFromTo(-1,1), this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true)));
 			}
 			for (i=0;i<nb_mobiles/2;i++){
-				this._mobiles.push(new Cercle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(10,30), 0, this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255))));
+				this._mobiles.push(new Cercle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(10,30), 0, this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true)));
 			}
 		} else{
 			for (i=0;i<nb_mobiles/2-1;i++){
-				this._mobiles.push(new Triangle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(20,40), randomFromTo(40,60), randomFromTo(-1,1), this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255))));
+				this._mobiles.push(new Triangle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(20,40), randomFromTo(40,60), randomFromTo(-1,1), this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true)));
 			}
 			for (i=0;i<nb_mobiles/2;i++){
-				this._mobiles.push(new Cercle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(10,30), 0, this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255))));
+				this._mobiles.push(new Cercle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(10,30), 0, this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true)));
 			}
 		}
 	}
@@ -64,13 +64,18 @@ export class Pong{
 		for (i=0;i<nb_murs;i++){
 			let r = Math.random();
 			if(r<0.5){
-				this._murs.push(new Mur(randomFromTo(0 + this._decalage/3,this._c_largeur - this._decalage/3), randomFromTo(0 + this._decalage/3,this._c_hauteur - this._decalage/3), randomFromTo(30,70), randomFromTo(200,300), 0 , this._ctx, Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),randomFromTo(0.8,1.2)));
+				this._murs.push(new Mur(randomFromTo(0 + this._decalage/3,this._c_largeur - this._decalage/3), randomFromTo(0 + this._decalage/3,this._c_hauteur - this._decalage/3), randomFromTo(30,70), randomFromTo(200,300), 0 , this._ctx, randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0.8,1.2)));
 			}else {
-				this._murs.push(new Mur(randomFromTo(0 + this._decalage/3,this._c_largeur - this._decalage/3), randomFromTo(0 + this._decalage/3,this._c_hauteur - this._decalage/3), randomFromTo(30,70), randomFromTo(200,300), Math.PI/2, this._ctx, Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),randomFromTo(0.8,1.2)));
+				this._murs.push(new Mur(randomFromTo(0 + this._decalage/3,this._c_largeur - this._decalage/3), randomFromTo(0 + this._decalage/3,this._c_hauteur - this._decalage/3), randomFromTo(30,70), randomFromTo(200,300), Math.PI/2, this._ctx, randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0.8,1.2)));
 			}
 		}
 	}
-
+	getDebug(){
+		return this._debug;
+	}
+	setDebug(d){
+		this._debug = d;
+	}
 	collision(){
 		var that = this
 
@@ -157,13 +162,15 @@ export class Pong{
 	    this.collision();
 	}
 	click(x,y){
-		console.log("pong.click");
 		let p = new Point(x,y,this._ctx);
 		for(let forme of this._mobiles.concat(this._murs)){
 			if(forme.collisionBoite(p)){
-				console.log("forme.collisionBoite");
 				if(forme.collisionPolygonale(p)){
-					console.log(forme);
+					forme._couleur.setCouleur(randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true));
+					if(forme instanceof Mobile){
+						forme.setVX(randomFromTo(-6,6));
+						forme.setVY(randomFromTo(-6,6));
+					}
 				}
 			}
 		}

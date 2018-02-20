@@ -49,11 +49,21 @@ function vitesse_aleatoire(){
 }
 let boutonVitesse = new Bouton("Vitesse",vitesse_aleatoire);
 BR1.appendChild(boutonVitesse.element);
+
+function toggleDebug() {
+  if (pong.getDebug){
+    pong.setDebug = false;
+  }
+  else pong.setDebug = true;
+}
+let boutonDebug = new Bouton("Debug",toggleDebug);
+BR1.appendChild(boutonDebug.element);
+
 //Fonction Input Nombre mobiles
 function nombre_mobiles(nb_mobiles){
   pong.resetMobiles(nb_mobiles);
 }
-let entreeMobile = new EntreeNumerique("Nombre de mobiles","Entre 1 et 250",nombre_mobiles,1,250,true);
+let entreeMobile = new EntreeNumerique("Nombre de mobiles","Entre 1 et 250",nombre_mobiles,1,250,false);
 IR1.appendChild(entreeMobile.element);
 //Fonction Input Nombre murs
 function nombre_murs(nb_murs){
