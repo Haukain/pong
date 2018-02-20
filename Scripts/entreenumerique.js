@@ -1,9 +1,9 @@
 import { assert,inInterval } from "./utils.js";
 
-export class NumericInput{
-  constructor(text,subtext,fun,min=0,max=100,integer=true){
-    this._text=text;
-    this._subtext=subtext;
+export class EntreeNumerique{
+  constructor(texte,soustexte,fun,min=0,max=100,integer=true){
+    this._texte=texte;
+    this._soustexte=soustexte;
     this._fun=fun;
     this._min=min;
     this._max=max;
@@ -12,20 +12,20 @@ export class NumericInput{
     this._wrapper = document.createElement("DIV");
     this._wrapper.className = "boite_entree";
     let inputId = "NumInp-"+Math.round(Math.random()*10000);
-    //text
-    this._textLabel = document.createElement("LABEL");
-    this._textLabel.htmlFor = inputId;
-    this._textLabel.textContent = this._text;
-    this._wrapper.appendChild(this._textLabel);
+    //texte
+    this._texteLabel = document.createElement("LABEL");
+    this._texteLabel.htmlFor = inputId;
+    this._texteLabel.textContent = this._texte;
+    this._wrapper.appendChild(this._texteLabel);
     //Input
     this._input = document.createElement("INPUT");
     this._input.id = inputId;
     this._wrapper.appendChild(this._input);
-    //subtext
-    this._subtextLabel = document.createElement("LABEL");
-    this._subtextLabel.htmlFor = inputId;
-    this._subtextLabel.textContent = this._subtext;
-    this._wrapper.appendChild(this._subtextLabel);
+    //suoustexte
+    this._soustexteLabel = document.createElement("LABEL");
+    this._soustexteLabel.htmlFor = inputId;
+    this._soustexteLabel.textContent = this._soustexte;
+    this._wrapper.appendChild(this._soustexteLabel);
     //function
     let that = this;
     this._input.addEventListener("keydown",(e)=>{
@@ -37,13 +37,13 @@ export class NumericInput{
       that._fun(val);
     },false);
   }
-  setText(t){
-    this._text=t;
-    this._textLabel.textContent=this._text;
+  setTexte(t){
+    this._texte=t;
+    this._texteLabel.textContent=this._texte;
   }
-  setSubtext(t){
-    this._subtext=t;
-    this._subtextLabel.textContent=this._subtext;
+  setSoustexte(t){
+    this._soustexte=t;
+    this._soustexteLabel.textContent=this._soustexte;
   }
   setAction(f){
     this._fun=f;

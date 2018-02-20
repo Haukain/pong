@@ -1,6 +1,6 @@
-export class Button{
-  constructor(text,fun){
-    this._text=text;
+export class Bouton{
+  constructor(texte,fun){
+    this._texte=texte;
     this._fun=fun;
     this._elem = document.createElement("BUTTON");
     let that = this;
@@ -8,9 +8,9 @@ export class Button{
     this._elem.textContent=this._text;
   }
   //Set
-  setText(t){
-    this._text=t;
-    this._elem.textContent=this._text;
+  setTexte(t){
+    this._texte=t;
+    this._elem.textContent=this._texte;
   }
   setAction(f){
     this._fun=f;
