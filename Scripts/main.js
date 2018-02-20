@@ -1,10 +1,9 @@
-import { assert, randomFromTo, inInterval,select_element} from "./utils.js";
+import { assert, randomFromTo, inInterval, select_element, getRelativeCoordinates} from "./utils.js";
 import { Pong } from "./pong.js";
 import { Button } from "./button.js";
 import { NumericInput } from "./numericinput.js";
 // Récupération du Canvas
 var canvas = document.getElementById("myCanvas");
-canvas.addEventListener("click",select_element,false);
 // Récupération de la hauteur et largeur du canvas
 let c_largeur = canvas.width
 let c_hauteur = canvas.height
@@ -63,8 +62,16 @@ function nombre_murs(nb_murs){
 let wallInput = new NumericInput("Nombre de murs","Entre 0 et 5",nombre_murs,0,5,true);
 IR1.appendChild(wallInput.element);
 //Création du jeu
-let pong = new Pong(1,2,2,ctx,decalage,c_largeur,c_hauteur);
+let pong = new Pong(1,2,2,ctx,decalage,c_largeur,c_hauteur,false);
 
+canvas.addEventListener("click",e=>{
+  let coords = getRelativeCoordinates(e,canvas);
+  coords.x+=canvas.clientWidth/2;
+  coords.y+=canvas.clientHeight/2;
+  coords.x*=canvas.width/canvas.clientWidth;
+  coords.y*=canvas.height/canvas.clientHeight;
+  pong.click(coords.x,coords.y);
+},false);
 //Fonction de boucle
 let prevT =0;
 function boucle(t) {

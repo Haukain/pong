@@ -1,14 +1,17 @@
 import { randomFromTo } from "./utils.js";
+import { Mobile } from "./mobile.js";
+import { Point } from "./point.js";
 import { Mur } from "./mur.js";
 import { Triangle } from "./triangle.js";
 import { Cercle } from "./cercle.js";
 
 export class Pong{
-	constructor(nb_mur,nb_triangle,nb_cercle,ctx,decalage,c_largeur,c_hauteur){
+	constructor(nb_mur,nb_triangle,nb_cercle,ctx,decalage,c_largeur,c_hauteur,debug){
 		this._ctx = ctx;
 		this._decalage = decalage;
 		this._c_largeur = 1332;
 		this._c_hauteur = 924;
+		this._debug = debug;
 		//Création d'un vecteur murs de nb_mur murs
 		this._murs = [];
 		var i;
@@ -72,12 +75,6 @@ export class Pong{
 		var that = this
 
 		this._mobiles.forEach(function(mobile) {
-	  		if (mobile.get_x()>that._c_largeur || mobile.get_x()<0){
-	  			mobile.set_vx(-mobile.get_vx());
-	  			}
-	  		if (mobile.get_y()>that._c_hauteur || mobile.get_y()<0){
-	  			mobile.set_vy(-mobile.get_vy());
-	  			}
 	  		that._murs.forEach(function(mur) {
 		  		if(mur._orientation==0){
 		  			if (mobile.get_x()>mur.get_x()-mur.largeur()/2 && mobile.get_x()<(mur.get_x()+mur.largeur()/2) && mobile.get_y()>mur.get_y()-mur.hauteur()/2 && mobile.get_y()<(mur.get_y()+mur.hauteur()/2) ) {
@@ -114,17 +111,61 @@ export class Pong{
 		  		}
 			});
 		});
+		//nouvel algorithme
+		for(let mobile of this._mobiles){
+  		if (mobile.get_x()>that._c_largeur || mobile.get_x()<0){
+  			mobile.set_vx(-mobile.get_vx());
+			}
+  		if (mobile.get_y()>that._c_hauteur || mobile.get_y()<0){
+  			mobile.set_vy(-mobile.get_vy());
+			}
+		}
+		let objects = this._mobiles.concat(this._murs);
+		for(let i of objects){
+			for(let j of objects){
+				if(i != j && i instanceof Mobile && i.collisionBoite(j) && i.collisionPolygonale(j)){
+					if(j instanceof Mobile){
+						let vi = Math.sqrt(Math.pow(i.get_vx(),2)+Math.pow(i.get_vy(),2));
+						let vj = Math.sqrt(Math.pow(j.get_vx(),2)+Math.pow(j.get_vy(),2));
+						let v = (vi+vj)/2;
+						let a =Math.atan2(i.get_y()-j.get_y(),i.get_x()-j.get_x());
+						i.set_vx(v*Math.cos(a));
+						i.set_vy(v*Math.sin(a));
+						j.set_vx(-v*Math.cos(a));
+						j.set_vy(-v*Math.sin(a));
+					}else{
+						if(j instanceof Mur){ //cas particulier du mur
+							//a compléter
+						}
+					}
+				}
+			}
+		}
 	}
 
 	execute(dt){
 		this._ctx.clearRect(0,0,this._c_largeur,this._c_hauteur);
 	    this.get_mobiles().forEach(function(element) {
 	  		element.deplace(dt);
+			});
+	    this.get_murs().concat(this.get_mobiles()).forEach(function(element) {
 	  		element.dessine();
 			});
-	    this.get_murs().forEach(function(element) {
-	  		element.dessine();
+			if(this._debug) this.get_murs().concat(this.get_mobiles()).forEach(function(element) {
+	  		element.dessineCollision();
 			});
 	    this.collision();
+	}
+	click(x,y){
+		console.log("pong.click");
+		let p = new Point(x,y,this._ctx);
+		for(let forme of this._mobiles.concat(this._murs)){
+			if(forme.collisionBoite(p)){
+				console.log("forme.collisionBoite");
+				if(forme.collisionPolygonale(p)){
+					console.log(forme);
+				}
+			}
+		}
 	}
 }

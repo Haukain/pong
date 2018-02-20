@@ -21,9 +21,9 @@ export class Mobile extends Forme {
 		this._vitesse_y = vy;
 	}
 	deplace(dt){
-		this._x = this._x + this._vitesse_x*dt;
-		this._y = this._y + this._vitesse_y*dt;
-		this._orientation = this._orientation + 0.03*Math.sign(this._orientation)*dt;
+		this.set_x( this._x + this._vitesse_x*dt );
+		this.set_y( this._y + this._vitesse_y*dt );
+		this.set_orientation( this._orientation + 0.03*Math.sign(this._orientation)*dt );
 	}
 
 	dessine(){
