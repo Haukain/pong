@@ -71,14 +71,12 @@ export class Pong{
 			}
 		}
 	}
-<<<<<<< HEAD
 	getDebug(){
 		return this._debug;
 	}
 	setDebug(d){
 		this._debug = d;
 	}
-=======
 	getInterCollision(){
 		return this._interCollision;
 	}
@@ -86,7 +84,6 @@ export class Pong{
 		this._interCollision = ic;
 	}
 
->>>>>>> 6be450047c9e6f7e1c21a7fad99ccf798fb30852
 	collision(){
 		var that = this
 

@@ -49,7 +49,6 @@ function vitesse_aleatoire(){
 }
 let boutonVitesse = new Bouton("Vitesse",vitesse_aleatoire);
 BR1.appendChild(boutonVitesse.element);
-<<<<<<< HEAD
 
 function toggleDebug() {
   if (pong.getDebug){
@@ -60,14 +59,12 @@ function toggleDebug() {
 let boutonDebug = new Bouton("Debug",toggleDebug);
 BR1.appendChild(boutonDebug.element);
 
-=======
 //fonction Bouton interCollision
 function inverser_interCollision(){
 	pong.setInterCollision(!pong.getInterCollision());
 }
 let boutonInterCollision = new Bouton("InterCollision",inverser_interCollision);
 BR1.appendChild(boutonInterCollision.element);
->>>>>>> 6be450047c9e6f7e1c21a7fad99ccf798fb30852
 //Fonction Input Nombre mobiles
 function nombre_mobiles(nb_mobiles){
   pong.resetMobiles(nb_mobiles);
