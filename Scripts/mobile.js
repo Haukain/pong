@@ -8,22 +8,22 @@ export class Mobile extends Forme {
     	this._vitesse_x = vitesse_x;
     	this._vitesse_y = vitesse_y;
 	}
-	get_vx(){
+	getVX(){
 		return this._vitesse_x;
 	}
-	get_vy(){
+	getVY(){
 		return this._vitesse_y;
 	}
-	set_vx(vx){
+	setVX(vx){
 		this._vitesse_x = vx;
 	}
-	set_vy(vy){
+	setVY(vy){
 		this._vitesse_y = vy;
 	}
 	deplace(dt){
-		this.set_x( this._x + this._vitesse_x*dt );
-		this.set_y( this._y + this._vitesse_y*dt );
-		this.set_orientation( this._orientation + 0.03*Math.sign(this._orientation)*dt );
+		this.setX( this._x + this._vitesse_x*dt );
+		this.setY( this._y + this._vitesse_y*dt );
+		this.setOrientation( this._orientation + 0.03*Math.sign(this._orientation)*dt );
 	}
 
 	dessine(){

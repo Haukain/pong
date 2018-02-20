@@ -37,18 +37,21 @@ export class NumericInput{
       that._fun(val);
     },false);
   }
-  set text(t){
+  setText(t){
     this._text=t;
     this._textLabel.textContent=this._text;
   }
-  set subtext(t){
+  setSubtext(t){
     this._subtext=t;
     this._subtextLabel.textContent=this._subtext;
   }
-  set action(f){
+  setAction(f){
     this._fun=f;
   }
-  get element(){
+  getElement(){
     return this._wrapper;
+  }
+  get element(){
+    return this.getElement();
   }
 }

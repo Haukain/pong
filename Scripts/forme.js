@@ -15,52 +15,52 @@ export class Forme {
     this._orientation = orientation;
     this._ctx = ctx;
     this._couleur = new Couleur(r,v,b);
-    this._couleur.set_forme(this);
+    this._couleur.setForme(this);
     this.genBoiteCollisions();
     this._polygoneCollision = new PolygoneCollision(this._x,this._y);
   }
   //Get
-  get_x() {
+  getX() {
     return this._x;
   }
-  get_y() {
+  getY() {
     return this._y;
   }
-  hauteur() {
+  getHauteur() {
     return this._hauteur;
   }
-  largeur() {
+  getLargeur() {
     return this._largeur;
   }
-  get_orientation() {
+  getOrientation() {
     return this._orientation;
   }
-  get_couleur() {
+  getCouleur() {
     return this._couleur;
   }
-  get_polygoneCollision(){
+  getPolygoneCollision(){
     return this._polygoneCollision;
   }
   //Set
-  set_x(pos_x) {
+  setX(pos_x) {
     this._polygoneCollision.translate(pos_x-this._x,0);
     this._x = pos_x;
     this.genBoiteCollisions();
   }
-  set_y(pos_y) {
+  setY(pos_y) {
     this._polygoneCollision.translate(0,pos_y-this._y);
     this._y = pos_y;
     this.genBoiteCollisions();
   }
-  set_hauteur(h) {
+  setHauteur(h) {
     this._hauteur = h;
     this.genBoiteCollisions();
   }
-  set_largeur(w) {
+  setLargeur(w) {
     this._largeur = w;
     this.genBoiteCollisions();
   }
-  set_orientation(o) {
+  setOrientation(o) {
     this._polygoneCollision.rotate(o-this._orientation);
     this._orientation = o;
     this.genBoiteCollisions();
@@ -82,7 +82,7 @@ export class Forme {
     else return f.collisionBoite(this,true);
   }
   collisionPolygonale(f){
-    return this._polygoneCollision.collide(f.get_polygoneCollision());
+    return this._polygoneCollision.collide(f.getPolygoneCollision());
   }
   dessineCollision(){
     this._ctx.strokeStyle = 'red';
