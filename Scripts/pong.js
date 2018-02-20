@@ -143,7 +143,6 @@ export class Pong{
 							}else if(!inInterval(i.getY(),y-h/2,y+h/2)){
 								i.setVY(-i.getVY());
 							}
-
 						}
 					}
 				}

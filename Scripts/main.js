@@ -95,6 +95,6 @@ function boucle(t) {
   let dt=(t-prevT)/1000;
   prevT=t;
   //console.log(dt);
-  if(!pause && dt<1)pong.execute(dt*25);
+  if(!pause && dt<1)pong.execute(dt*20);
 }
 requestAnimationFrame(boucle);
