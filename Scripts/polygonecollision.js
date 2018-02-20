@@ -1,3 +1,4 @@
+
 function cross(X,Y){
   return X[0]*Y[1]-X[1]*Y[0];
 }
@@ -12,19 +13,29 @@ export class PolygoneCollision{
   getPoint(i){
     return this._points[i];
   }
-  get points(){
+  getPoints(){
     return this._points;
   }
-  get center(){
+  get points(){
+    return this.getPoints();
+  }
+  getCenter(){
     return [this._x,this.y];
+  }
+  get center(){
+    return this.getCenter(i);
   }
   //set
   setPoint(i,v){
     this._points[i]=v;
   }
-  set center(xy){
+  setCenter(xy){
+    if(typeof y != "undefined") x=[x,y];
     this._x = x[0];
     this.y = y[0];
+  }
+  set center(xy){
+    this.setCenter(xy);
   }
   //méthodes
   push(x,y){
@@ -51,7 +62,7 @@ export class PolygoneCollision{
     }
     this.translate(tx,ty);
   }
-  giftWrap(p){
+  marcheDeJarvis(p){
     let pv=0;
     for(let i=1;i<this._points.length;i++){
       let v1=[this._points[i][0]-this._points[i-1][0],this._points[i][1]-this._points[i-1][1]];
@@ -62,13 +73,13 @@ export class PolygoneCollision{
     }
     return true;
   }
-  collide(c,deux=false){
+  collision(c,deux=false){
     let inn = false;
     for(let p of c.points){
-      inn = this.giftWrap(p);
+      inn = this.marcheDeJarvis(p);
       if(inn)break;
     }
     if(deux || inn) return inn;
-    return c.collide(this,true);
+    return c.collision(this,true);
   }
 }

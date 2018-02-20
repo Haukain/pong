@@ -5,7 +5,7 @@ export class Bouton{
     this._elem = document.createElement("BUTTON");
     let that = this;
     this._elem.addEventListener("click",(e)=>{that._fun(e);},false);
-    this._elem.textContent=this._text;
+    this._elem.textContent=this._texte;
   }
   //Set
   setTexte(t){

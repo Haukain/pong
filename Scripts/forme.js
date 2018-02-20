@@ -82,7 +82,7 @@ export class Forme {
     else return f.collisionBoite(this,true);
   }
   collisionPolygonale(f){
-    return this._polygoneCollision.collide(f.getPolygoneCollision());
+    return this._polygoneCollision.collision(f.getPolygoneCollision());
   }
   dessineCollision(){
     this._ctx.strokeStyle = 'red';
