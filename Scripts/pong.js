@@ -6,9 +6,9 @@ import { Triangle } from "./triangle.js";
 import { Cercle } from "./cercle.js";
 
 export class Pong{
-	constructor(nb_mur,nb_mobiles,ctx,decalage,c_largeur,c_hauteur,interCollision,debug){
+	constructor(nb_mur,nb_mobiles,ctx,marge,c_largeur,c_hauteur,interCollision,debug){
 		this._ctx = ctx;
-		this._decalage = decalage;
+		this._marge = marge;
 		this._c_largeur = c_largeur;
 		this._c_hauteur = c_hauteur;
 		this._debug = debug;
@@ -21,23 +21,11 @@ export class Pong{
 	getMobiles(){
 		return this._mobiles;
 	}
-	resetMobiles(nb_mobiles){
+	resetMobiles(nbMobiles){
 		this._mobiles = [];
-		var i;
-		if(nb_mobiles%2==0){
-			for (i=0;i<nb_mobiles/2;i++){
-				this._mobiles.push(new Triangle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(20,40), randomFromTo(40,60), randomFromTo(-1,1), this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true)));
-			}
-			for (i=0;i<nb_mobiles/2;i++){
-				this._mobiles.push(new Cercle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(10,30), 0, this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true)));
-			}
-		} else{
-			for (i=0;i<nb_mobiles/2-1;i++){
-				this._mobiles.push(new Triangle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(20,40), randomFromTo(40,60), randomFromTo(-1,1), this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true)));
-			}
-			for (i=0;i<nb_mobiles/2;i++){
-				this._mobiles.push(new Cercle(randomFromTo(0 + this._decalage,this._c_largeur - this._decalage), randomFromTo(0 + this._decalage,this._c_hauteur - this._decalage), randomFromTo(10,30), 0, this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true)));
-			}
+		for(let i=0;i<nbMobiles;i++){
+			if(i%2) this._mobiles.push(new Triangle(randomFromTo(0 + this._marge,this._c_largeur - this._marge), randomFromTo(0 + this._marge,this._c_hauteur - this._marge), randomFromTo(20,40), randomFromTo(40,60), randomFromTo(-1,1), this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true)));
+			else this._mobiles.push(new Cercle(randomFromTo(0 + this._marge,this._c_largeur - this._marge), randomFromTo(0 + this._marge,this._c_hauteur - this._marge), randomFromTo(10,30), 0, this._ctx,randomFromTo(-6,6),randomFromTo(-6,6),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true)));
 		}
 	}
 	getMurs(){
@@ -49,9 +37,9 @@ export class Pong{
 		for (i=0;i<nb_murs;i++){
 			let r = Math.random();
 			if(r<0.5){
-				this._murs.push(new Mur(randomFromTo(0 + this._decalage/3,this._c_largeur - this._decalage/3), randomFromTo(0 + this._decalage/3,this._c_hauteur - this._decalage/3), randomFromTo(30,70), randomFromTo(200,300), 0 , this._ctx, randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0.8,1.2)));
+				this._murs.push(new Mur(randomFromTo(0 + this._marge/3,this._c_largeur - this._marge/3), randomFromTo(0 + this._marge/3,this._c_hauteur - this._marge/3), randomFromTo(30,70), randomFromTo(200,300), 0 , this._ctx, randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0.8,1.2)));
 			}else {
-				this._murs.push(new Mur(randomFromTo(0 + this._decalage/3,this._c_largeur - this._decalage/3), randomFromTo(0 + this._decalage/3,this._c_hauteur - this._decalage/3), randomFromTo(30,70), randomFromTo(200,300), Math.PI/2, this._ctx, randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0.8,1.2)));
+				this._murs.push(new Mur(randomFromTo(0 + this._marge/3,this._c_largeur - this._marge/3), randomFromTo(0 + this._marge/3,this._c_hauteur - this._marge/3), randomFromTo(30,70), randomFromTo(200,300), Math.PI/2, this._ctx, randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0,255,true),randomFromTo(0.8,1.2)));
 			}
 		}
 	}

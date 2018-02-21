@@ -77,7 +77,10 @@ input {
   <div class="textes" id="IR1">
   </div>
 </div>
-<!-- Importation différents fichier de Javascript -->
-<script src="scripts/main.js" type="module"></script>
+<!-- initialisation de l'app -->
+<script type="module">
+import { App } from "./scripts/main.js"
+let app = new App(document.getElementById("myCanvas"),document.getElementById("BR1"),document.getElementById("IR1"));
+</script>
 </body>
 </html>

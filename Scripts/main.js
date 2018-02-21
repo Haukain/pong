@@ -2,99 +2,117 @@ import { assert, randomFromTo, inInterval, getRelativeCoordinates} from "./utils
 import { Pong } from "./pong.js";
 import { Bouton } from "./bouton.js";
 import { EntreeNumerique } from "./entreenumerique.js";
-// Récupération du Canvas
-var canvas = document.getElementById("myCanvas");
-// Récupération de la hauteur et largeur du canvas
-let c_largeur = canvas.width
-let c_hauteur = canvas.height
-// Contexte du canvas : 2D
-let ctx = canvas.getContext("2d");
 
-//Decalage pour centrer les formes
-let decalage = 250;
-var pause = false;
-var var_boucle;
+export class App{
+  constructor(canvas,boutons,entrees){
+    // Récupération du Canvas
+    this._canvas = canvas;
+    // Contexte du canvas : 2D
+    this._ctx = this._canvas.getContext("2d");
+    //Récupération des conteneurs de bouton et d'entrées
+    this._boutons = boutons;
+    this._entrees = entrees;
+    //Decalage pour centrer les formes
+    this._marge = 250;
 
-let BR1 = document.getElementById("BR1");
-let IR1 = document.getElementById("IR1");
+    //booleen de pause
+    this._pause = false;
 
-//Fonction Bouton Pause
-function pause_game(){
-  pause = !pause;
-	if (pause) console.log("Le jeu a été mis en pause");
-	else console.log("Le jeu a été relancé");
-}
-let boutonPause = new Bouton("Pause",pause_game);
-BR1.appendChild(boutonPause.element);
-//Fonction Bouton Reset
-function reset(){
-	location.reload();
-}
-let boutonReset = new Bouton("Reset",reset);
-BR1.appendChild(boutonReset.element);
-//Fontion Bouton Couleur
-function couleur_aleatoire(){
-	pong.getMobiles().forEach(function(element) {
-		element.getCouleur().setCouleur(Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)),Math.trunc(randomFromTo(0,255)));
-	});
-}
-let boutonCouleur = new Bouton("Couleur",couleur_aleatoire);
-BR1.appendChild(boutonCouleur.element);
-//Fonction Bouton Vitesse
-function vitesse_aleatoire(){
-	pong.getMobiles().forEach(function(element) {
-		element.setVX(randomFromTo(-6,6));
-		element.setVY(randomFromTo(-6,6));
-	});
-}
-let boutonVitesse = new Bouton("Vitesse",vitesse_aleatoire);
-BR1.appendChild(boutonVitesse.element);
+    //création du Pong
+    this._pong = new Pong(1,4,this._ctx,this._marge,this._canvas.width,this._canvas.height,true,false);
 
-//fonction Bouton interCollision
-function inverser_interCollision(){
-	pong.setInterCollision(!pong.getInterCollision());
-}
-let boutonInterCollision = new Bouton("InterCollision",inverser_interCollision);
-BR1.appendChild(boutonInterCollision.element);
+    //boucle de simulation
+    let prevT =0;
+    let that = this; //conservation du contexte
+    function boucle(t) {
+      requestAnimationFrame(boucle);
+      let dt=(t-prevT)/1000;
+      prevT=t;
+      that.update(dt);
+    }
+    requestAnimationFrame(boucle);
 
-//Bouton Debug
-function toggleDebug() {
-  pong.setDebug(!pong.getDebug());
-}
-let boutonDebug = new Bouton("Debug",toggleDebug);
-BR1.appendChild(boutonDebug.element);
+    //ajout de l'événement click
+    this._canvas.addEventListener("click",e=>this.click(e),false);
+
+    //===boutons===
+
+    //Bouton Pause
+    this._boutonPause = new Bouton("Pause",()=>this.togglePause());
+    this._boutons.appendChild(this._boutonPause.element);
+    //Bouton Reset
+    this._boutonReset = new Bouton("Reset",()=>this.reset());
+    this._boutons.appendChild(this._boutonReset.element);
+    //Bouton couleur
+    this._boutonCouleur = new Bouton("Couleur",()=>this.couleurAleatoire());
+    this._boutons.appendChild(this._boutonCouleur.element);
+    //Bouton Vitesse
+    this._boutonVitesse = new Bouton("Vitesse",()=>this.vitesseAleatoire());
+    this._boutons.appendChild(this._boutonVitesse.element);
+    //Bouton interCollision
+    this._boutonInterCollision = new Bouton("InterCollision",()=>this.toggleInterCollision());
+    this._boutons.appendChild(this._boutonInterCollision.element);
+    //Bouton debug
+    this._boutonDebug = new Bouton("Debug",()=>this.toggleDebug());
+    this._boutons.appendChild(this._boutonDebug.element);
 
 
-//Fonction Input Nombre mobiles
-function nombre_mobiles(nb_mobiles){
-  pong.resetMobiles(nb_mobiles);
-}
-let entreeMobile = new EntreeNumerique("Nombre de mobiles","Entre 1 et 250",nombre_mobiles,1,250,false);
-IR1.appendChild(entreeMobile.element);
-//Fonction Input Nombre murs
-function nombre_murs(nb_murs){
-  pong.resetMurs(nb_murs);
-}
-let entreeMurs = new EntreeNumerique("Nombre de murs","Entre 0 et 5",nombre_murs,0,5,true);
-IR1.appendChild(entreeMurs.element);
-//Création du jeu
-let pong = new Pong(1,4,ctx,decalage,c_largeur,c_hauteur,true,false);
+    //===Entréés===
 
-canvas.addEventListener("click",e=>{
-  let coords = getRelativeCoordinates(e,canvas);
-  coords.x+=canvas.clientWidth/2;
-  coords.y+=canvas.clientHeight/2;
-  coords.x*=canvas.width/canvas.clientWidth;
-  coords.y*=canvas.height/canvas.clientHeight;
-  pong.click(coords.x,coords.y);
-},false);
-//Fonction de boucle
-let prevT =0;
-function boucle(t) {
-  requestAnimationFrame(boucle);
-  let dt=(t-prevT)/1000;
-  prevT=t;
-  //console.log(dt);
-  if(!pause && dt<1)pong.execute(dt*20);
+    //Entrée mobiles
+    this._entreeMobile = new EntreeNumerique("Nombre de mobiles","Entre 1 et 250",e=>this.setNombreMobiles(e),1,250,false);
+    this._entrees.appendChild(this._entreeMobile.element);
+    //Entrée murs
+    this._entreeMurs = new EntreeNumerique("Nombre de murs","Entre 0 et 5",e=>this.setNombreMurs(e),0,5,true);
+    this._entrees.appendChild(this._entreeMurs.element);
+  }
+  //méthodes
+  update(dt){
+    if(!this._pause && dt<1)this._pong.execute(dt*20);
+  }
+  click(e){
+    let coords = getRelativeCoordinates(e,this._canvas);
+    coords.x+=this._canvas.clientWidth/2;
+    coords.y+=this._canvas.clientHeight/2;
+    coords.x*=this._canvas.width/this._canvas.clientWidth;
+    coords.y*=this._canvas.height/this._canvas.clientHeight;
+    this._pong.click(coords.x,coords.y);
+  }
+  //méthodes liéés à l'interface utilisateur
+  reset(){
+  	this._pong.resetMurs(1);
+  	this._pong.resetMobiles(4);
+  }
+  togglePause(){
+    this._pause = !this._pause;
+  	if (this._pause) console.log("Le jeu a été mis en pause");
+  	else console.log("Le jeu a été relancé");
+  }
+  toggleInterCollision(){
+  	this._pong.setInterCollision(!this._pong.getInterCollision());
+  }
+  toggleDebug() {
+    this._pong.setDebug(!this._pong.getDebug());
+  }
+  couleurAleatoire(){
+  	for(let mobile of this._pong.getMobiles()){
+  		mobile.getCouleur().setCouleur(
+        randomFromTo(0,255,true),
+        randomFromTo(0,255,true),
+        randomFromTo(0,255,true)
+      );
+  	}
+  }
+  vitesseAleatoire(){
+  	for( let mobile of this._pong.getMobiles() ){
+  		mobile.setVX(randomFromTo(-6,6));
+  		mobile.setVY(randomFromTo(-6,6));
+  	}
+  }
+  setNombreMobiles(nbMobiles){
+    this._pong.resetMobiles(nbMobiles);
+  }
+  setNombreMurs(nbMurs){
+    this._pong.resetMurs(nbMurs);
+  }
 }
-requestAnimationFrame(boucle);
