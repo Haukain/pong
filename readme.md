@@ -11,6 +11,7 @@ identiques à notre projet.
  - click sur les formes pour altérer leurs propriétés
  - mode d'affichage debug permettant de voir les boites de collision
  - mode intercollision qui permet aux mobiles de rebondir entre eux.
+ - interface graphique avec boutons pour modifier les paramètres du pong
 ## Exécution
 il est possible d'exécuter le projet en local avec un simple serveur HTTP
 une version en ligne est disponible à l'addresse:
